@@ -18,9 +18,12 @@ using namespace std;
 #define KEY_ARROW_UP 72
 #define KEY_ARROW_DOWN 80
 
+// 2 3 4 5 6 7 8 9 10 J Q K A
+string alphabet = ;
+
 class Game {
 public:
-	int cards[14];
+	char cards[14];
 	int count;
 	Game(){ 
 		count = 6;
@@ -76,7 +79,6 @@ int main() {
 	char last = -1, past = -1;
 
 	for (int i = 0; i < 14; i++) { opened_cards[i] = -1; }
-	// cards: 2 - 10 J Q K A
 	while (!win) {
 		if (opened == count)
 			break;
