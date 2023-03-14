@@ -43,7 +43,7 @@ public:
 			denominator = n;
 		}
 		if (denominator == 0) {
-			throw zero_d;
+			throw std::invalid_argument("Uncorrect denuminator. Set 1 at denuminator.");
 			denominator = 1;
 		}
 	}
@@ -91,18 +91,19 @@ class Rationalwithpart : Rational {
 public:
 	Rationalwithpart() : interger(0), Rational() { }
 	Rationalwithpart(int p) : interger(p), Rational() { }
-	Rationalwithpart(int p, int m, int n) {
+	Rationalwithpart(int p, int m, int n) : Rational(abs(m), abs(n)) {
 		if (p < 0 && m < 0 && n < 0) {
-			interger = -1 * p ;
-			Rational(abs(m), abs(n));
+			this->interger = -1 * p ;
 		}
 		else if (p < 0 && m < 0) {
 			interger = -1 * p;
-			Rational(m, n);
+			numerator = m;
+			denominator = n;
 		}
 		else {
 			interger = p;
-			Rational(m, n);
+			numerator = m;
+			denominator = n;
 		}
 	}
 	Rationalwithpart(const class Rational& a) : interger(0), Rational(a) {};
@@ -113,7 +114,9 @@ public:
 	}
 
 	Rationalwithpart RationalwithpartAdd(const class Rationalwithpart& a) {
-		Rationalwithpart result(RationalAdd(Rational(a.denominator * a.interger + numerator, denominator)));
+		Rationalwithpart result;
+		Rational convertNum(a.denominator * a.interger + numerator, denominator);
+		result.RationalAdd(convertNum);
 		result.SimpleRationalwithpart();
 		return result;
 	}
